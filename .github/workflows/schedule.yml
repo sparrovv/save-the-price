@@ -1,0 +1,40 @@
+name: Daily Schedule
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: "5 4 * * *"
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        # Semantic version range syntax or exact version of a Python version
+        python-version: '3.8'
+        # Optional - x64 or x86 architecture, defaults to x64
+        architecture: 'x64'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Run daily krakow
+      env:
+        GCS_PROJECT: ${{ secrets.GCS_PROJECT }}
+        GCS_BUCKET: ${{ secrets.GCS_BUCKET }}
+        GCS_SA_KEY: ${{ secrets.GCS_SA_KEY }}
+      run: |
+        otodomsearchcriteriaurl='https://www.otodom.pl/sprzedaz/mieszkanie/krakow/?search[filter_float_price:to]=1600000&search[filter_float_m:from]=70&search[filter_float_m:to]=120&search[filter_enum_rooms_num][0]=4&search[filter_enum_rooms_num][1]=5+&search[filter_enum_market][0]=secondary&search[filter_float_build_year:from]=1995&search[filter_float_build_year:to]=2019&search[city_id]=38&zoom=15&lat=50.064663716138&lon=19.889994965510223'
+
+        python srape.py $otodomsearchcriteriaurl --sheet-id="1UxxGQ8OYDyT7cJ-ZyYkUprRdp5ZGnyMewuFej_fMgqE" --number-of-pages=6 file-name-prefix=krakow --upload --upload-path=bigger_flats
