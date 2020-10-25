@@ -126,10 +126,12 @@ def main():
             .for_each(lambda x: f.write(x + '\n'))
 
     if options.upload:
+        logger.info(f"Uploading")
         credentials = get_credentials()
         upload_blob(file_path, f"{options.upload_path}/{file_name}", credentials)
 
     if options.sheet_id is not None:
+        logger.info(f"Saving in sheets")
         credentials = get_credentials()
         save_in_sheets(enriched_data, options.sheet_id, credentials)
 
