@@ -50,16 +50,17 @@ class OtodomParser:
         # remove noise
         del extra_important_data['photos']
         del extra_important_data['userAds']
+        del extra_important_data['breadcrumb']
 
         return {
-            'year' : year,
-            'rent' : rent,
-            'advert_id' : advert_id,
-            'created_at' : created_at,
-            'updated_at' : updated_at,
-            'address' : address,
-            'meta_target_data' : most_important_data,
-            'advert_data' : extra_important_data
+            'year': year,
+            'rent': rent,
+            'advert_id': advert_id,
+            'created_at': created_at,
+            'updated_at': updated_at,
+            'address': address,
+            'meta_target_data': most_important_data,
+            'advert_data': extra_important_data
         }
 
     @staticmethod
