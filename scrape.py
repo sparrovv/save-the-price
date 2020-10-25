@@ -87,7 +87,7 @@ def main():
     parser = OptionParser()
 
     parser.add_option("-u", "--upload", dest="upload", help="upload to google storage", default=False, action="store_true")
-    parser.add_option("-p", "--upload_path", dest="upload_path", help="upload path to google storage")
+    parser.add_option("-p", "--upload-path", dest="upload_path", help="upload path to google storage")
 
     parser.add_option("-g", "--sheet-id", dest="sheet_id", help="google sheet id")
 
