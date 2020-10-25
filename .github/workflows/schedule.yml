@@ -37,4 +37,4 @@ jobs:
       run: |
         otodomsearchcriteriaurl='https://www.otodom.pl/sprzedaz/mieszkanie/krakow/?search[filter_float_price:to]=1600000&search[filter_float_m:from]=70&search[filter_float_m:to]=120&search[filter_enum_rooms_num][0]=4&search[filter_enum_rooms_num][1]=5+&search[filter_enum_market][0]=secondary&search[filter_float_build_year:from]=1995&search[filter_float_build_year:to]=2019&search[city_id]=38&zoom=15&lat=50.064663716138&lon=19.889994965510223'
 
-        python srape.py $otodomsearchcriteriaurl --sheet-id="1UxxGQ8OYDyT7cJ-ZyYkUprRdp5ZGnyMewuFej_fMgqE" --number-of-pages=6 file-name-prefix=krakow --upload --upload-path=bigger_flats
+        python scrape.py $otodomsearchcriteriaurl --sheet-id="1UxxGQ8OYDyT7cJ-ZyYkUprRdp5ZGnyMewuFej_fMgqE" --number-of-pages=6 file-name-prefix=krakow --upload --upload-path=bigger_flats
