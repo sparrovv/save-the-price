@@ -116,15 +116,14 @@ def main():
     enriched_data = seq(parsed_results) \
         .map(lambda x: merge_with_details(x, details))
 
-    # def con(dict):
-    #     logger.info(f"Converting ")
-    #     return json.dumps(dict)
-    #
+    def con(dict):
+        return json.dumps(dict, ensure_ascii=False)
+
 
     logger.info(f"Saving to JSON file")
-    # enriched_data.map(lambda x: con(x))\
-    #     .to_file(file_path)
-    enriched_data.to_jsonl(f"{file_path}")
+    with open(file_path, 'a', encoding='utf8') as f:
+        enriched_data.map(lambda x: con(x)) \
+            .for_each(lambda x: f.write(x + '\n'))
 
     if options.upload:
         credentials = get_credentials()
